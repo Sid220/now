@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Now{% endblock %}
+
+{% block content %}
+    <div id="cover">
+        <h1>NOW</h1>
+        <p>A livestream of the here and now</p>
+        <div class="button" id="begin-button">Begin</div>
+    </div>
+    <div id="player">
+        <iframe id="player-iframe" src="{{ url_for('static', filename='loading.html') }}" frameborder="0" allowfullscreen></iframe>
+        <div class="player-controls">
+            <div id="player-pause">
+                <div class="control-main button">
+                    <i class="bi bi-stopwatch-fill"></i>
+                </div>
+            </div>
+            <div id="player-timer" class="loading">
+                <div class='loading-inner-shadow button'>
+                    <i class="bi bi-skip-end-circle-fill"></i>
+                </div>
+                <div class='loading-hold loading-left'>
+                    <div class='loading-fill'></div>
+                </div>
+                <div class='loading-hold loading-right'>
+                    <div class='loading-fill'></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

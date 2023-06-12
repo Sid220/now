@@ -1,0 +1,183 @@
+$main-color: #001B2E;
+$secondary-color: #294C60;
+$muted-color: #ADB6C4;
+
+* {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position-x: center;
+}
+
+.button {
+  cursor: pointer;
+}
+
+@keyframes zoomInDown {
+  from {
+    opacity: 0;
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+
+#cover {
+  backdrop-filter: blur(5px);
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  z-index: 10000;
+  position: absolute;
+
+  h1 {
+    font-size: 5rem;
+    margin-top: 10rem;
+    animation: zoomInDown 1s ease-in-out;
+  }
+}
+
+.zoomInDown {
+  animation-name: zoomInDown;
+}
+
+#player-iframe {
+  width: 75vw;
+  // 9 / 16
+  height: calc(75vw * 0.5625);
+  max-height: 80vh;
+  border: none;
+  position: absolute;
+  display: none;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  border-radius: 30px;
+}
+
+.player-controls {
+  position: absolute;
+  margin: 10px;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100vw;
+
+  > div {
+    display: none;
+    width: 5rem;
+    height: 5rem;
+
+    .control-main {
+      width: 4.5rem !important;
+      height: 4.5rem !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+      background-color: $main-color;
+    }
+
+    i {
+      font-size: 2rem;
+    }
+  }
+
+}
+
+.loading {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.loading-inner-shadow {
+  z-index: 4;
+  border-radius: 100%;
+  width: 4.5rem !important;
+  height: 4.5rem !important;
+  background-color: $main-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.loading-hold {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 0, 0 0, 0 100%, 50% 100%);
+  border-radius: 100%;
+}
+
+.loading-fill {
+  background-color: $secondary-color;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+
+.loading-left .loading-fill {
+  z-index: 1;
+  animation: anim-loading-left 15s linear both infinite;
+}
+
+@keyframes anim-loading-left {
+  0% {
+    transform: rotate(180deg);
+  }
+  50%, 100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+.loading-right {
+  z-index: 3;
+  transform: rotate(180deg);
+}
+
+.loading-right .loading-fill {
+  z-index: 3;
+  animation: anim-loading-right 15s linear both infinite;
+}
+
+@keyframes anim-loading-right {
+  0%, 50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+#begin-button {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -0%);
+  width: 15rem;
+  height: 7rem;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  background-color: $main-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
