@@ -1,0 +1,5 @@
+Flask==2.3.2
+google_api_python_client==2.88.0
+google_auth_oauthlib==1.0.0
+mariadb==1.1.6
+protobuf==4.23.2
