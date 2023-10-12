@@ -47,7 +47,9 @@ function newVideo() {
         resetTime();
         updateTime();
         updateTimeInterval = setInterval(updateTime, 1000);
-        timerPlayAnim();
+	if(!paused) {
+            timerPlayAnim();
+	}
     }
 
     timerPauseAnim();
