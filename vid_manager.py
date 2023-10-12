@@ -14,16 +14,22 @@ import db
 
 
 def get_rand_vids(num: int = 10):
+    db.db_connect()
     try:
         statement = "SELECT t1.video_id FROM videos AS t1 JOIN (SELECT video_id FROM videos ORDER BY RAND() LIMIT %s) " \
                     "as t2 ON t1.video_id=t2.video_id"
         db.cur.execute(statement, (num,))
-        return [i[0] for i in db.cur.fetchall()]
+        data = [i[0] for i in db.cur.fetchall()]
+        db.db_close()
+        return data
     except mariadb.Error as e:
-        return f"Error adding entry to database"
+        db.db_close()
+        return f"Error adding entry to database {e}"
 
 
 def download_vids(request):
+    db.db_connect()
+
     returnString = ""
 
     scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
@@ -99,5 +105,7 @@ def download_vids(request):
         db.conn.commit()
     except mariadb.Error as e:
         returnString += f"Error removing entry from database"
+
+    db.db_close()
 
     return returnString
